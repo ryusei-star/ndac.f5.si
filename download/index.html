@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>NovaDefender Latest Download</title>
+</head>
+<body>
+    <script>fetch('https://api.github.com/repos/creeperdeveloper/NovaDefender-AntiCheat/releases/latest')
+            .then(response => response.json())
+            .then(data => {
+                const asset = data.assets.find(a => a.name.endsWith('.mcpack'));
+                if (asset) {
+                    const link = document.createElement('a');
+                    link.href = asset.browser_download_url;
+                    link.download = asset.name;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    alert('mcpackファイルが見つかりませんでした。');
+                }
+            })
+            .catch(err => {
+                console.error('API取得エラー:', err);
+                alert('最新バージョンの取得に失敗しました。');
+            });</script>
+</body>
+</html>
